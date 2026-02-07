@@ -29,10 +29,8 @@ fontObj = pygame.font.Font(None, 25)
 while running:
     dt = clock.tick(60) / 1000  # delta time, limited to 60 FPS
 
-    # Update theta3 based on theta2 (second polarizer angle)
     theta3 = math.radians(abs(math.degrees(theta2) - 90))
 
-    # Calculate intensity using Malus's Law
     i2 = calculate_intensity(theta2, theta3)[0]
     i3 = calculate_intensity(theta2, theta3)[1]
 
@@ -42,7 +40,6 @@ while running:
     color2 = get_color(i2)
     color3 = get_color(i3)
 
-    # Render text for angle and intensity
     text1 = fontObj.render(f"θ = {math.degrees(theta2) % 90}°", True, (0, 0, 255))
     text2 = fontObj.render(f"I2 = {i2 * 100}%", True, (0, 0, 255))
     text3 = fontObj.render(f"I3 = {i3 * 100}%", True, (0, 0, 255))
@@ -63,6 +60,7 @@ while running:
 
     slider = Slider(screen, 100, 600, 800, 40, min=0, max=90, step=0.1)
     theta2 = slider.getValue()
+
     # write text
     screen.blit(text1, (10, 10))
     screen.blit(text2, (10, 30))
@@ -74,7 +72,7 @@ while running:
     pygame.draw.rect(screen, color2, [640, 100, 320, 100])
     pygame.draw.rect(screen, color3, [960, 100, 320, 100])
 
-    # Update the display
+    # update screen
     pygame.display.flip()
     pygame_widgets.update(events)
     pygame.display.update()
