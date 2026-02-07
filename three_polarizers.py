@@ -19,12 +19,13 @@ def get_color(i):
     return [math.floor(255 * i), math.floor(255 * i), math.floor(255 * i)]
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080))
+pygame.display.set_caption('trois polariseurs')
 clock = pygame.time.Clock()
 running = True
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
-fontObj = pygame.font.Font(None, 35)
+fontObj = pygame.font.Font(None, 30)
 slider = Slider(screen, 100, 600, 900, 40, min=1, max=90, step=1, color=(100,100,100))
 value = theta2
 
@@ -46,6 +47,9 @@ while running:
     text1 = fontObj.render(f"θ = {math.degrees(theta2) % 90}°", True, (0, 0, 255))
     text2 = fontObj.render(f"I2 = {i2 * 100}%", True, (0, 0, 255))
     text3 = fontObj.render(f"I3 = {i3 * 100}%", True, (0, 0, 255))
+    text4 = fontObj.render(f"0°", True, (0, 0, 255))
+    text5 = fontObj.render(f"θ = {math.degrees(theta2) % 90}°", True, (0, 0, 255))
+    text6 = fontObj.render(f"90°", True, (0, 0, 255))
 
     events = pygame.event.get()
 
@@ -73,6 +77,10 @@ while running:
     screen.blit(text1, (10, 10))
     screen.blit(text2, (10, 30))
     screen.blit(text3, (10, 50))
+    screen.blit(text4, (460, 410))
+    screen.blit(text5, (940, 410))
+    screen.blit(text6, (1420, 410))
+    screen.blit(text5, (1050, 610))
 
     # draw color rectangles
     pygame.draw.rect(screen, color0, [0, 100, 480, 300])
