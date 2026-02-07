@@ -1,5 +1,5 @@
 import math
-import pygame, sys
+import pygame
 from pygame.locals import *
 from pygame_widgets.slider import Slider
 import pygame_widgets
@@ -58,8 +58,7 @@ while running:
 
     screen.fill((0,0,0))
 
-    slider = Slider(screen, 100, 600, 800, 40, min=0, max=90, step=0.1)
-    theta2 = slider.getValue()
+    # slider = Slider(screen, 100, 600, 800, 40, min=0, max=90, step=0.1)
 
     # write text
     screen.blit(text1, (10, 10))
@@ -74,7 +73,5 @@ while running:
 
     # update screen
     pygame.display.flip()
-    pygame_widgets.update(events)
-    pygame.display.update()
 
 pygame.quit()
