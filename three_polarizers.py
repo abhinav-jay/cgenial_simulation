@@ -5,8 +5,9 @@ from pygame_widgets.slider import Slider
 import pygame_widgets
 
 theta1 = 0
-theta2 = math.radians(int(input("Enter the angle of the second polarizer in degrees: ")))
+theta2 = math.radians(44)
 theta3 = math.radians(abs(theta2 - 90))
+t = 30
 
 def calculate_intensity(theta2, theta3):
     i1 = 1 / 2
@@ -26,7 +27,7 @@ running = True
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 fontObj = pygame.font.Font(None, 30)
-slider = Slider(screen, 100, 600, 900, 40, min=1, max=90, step=1, color=(100,100,100))
+slider = Slider(screen, 100, 600, 900, 40, min=0, max=90, step=1, color=(100,100,100))
 value = theta2
 
 
@@ -44,11 +45,11 @@ while running:
     color2 = get_color(i2)
     color3 = get_color(i3)
 
-    text1 = fontObj.render(f"θ = {math.degrees(theta2) % 90}°", True, (0, 0, 255))
+    text1 = fontObj.render(f"θ = {math.degrees(theta2) % 91}°", True, (0, 0, 255))
     text2 = fontObj.render(f"I2 = {i2 * 100}%", True, (0, 0, 255))
     text3 = fontObj.render(f"I3 = {i3 * 100}%", True, (0, 0, 255))
     text4 = fontObj.render(f"0°", True, (0, 0, 255))
-    text5 = fontObj.render(f"θ = {math.degrees(theta2) % 90}°", True, (0, 0, 255))
+    text5 = fontObj.render(f"θ = {math.degrees(theta2) % 91}°", True, (0, 0, 255))
     text6 = fontObj.render(f"90°", True, (0, 0, 255))
 
     events = pygame.event.get()
@@ -65,11 +66,11 @@ while running:
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_h]:
-        value -= dt * 30
-        value = value % 90
+        value -= 1
+        value = value % 91
     if keys[pygame.K_l]:
-        value += dt * 30
-        value = value % 90
+        value += 1
+        value = value % 91
 
     slider.setValue(value)
 
@@ -88,8 +89,15 @@ while running:
     pygame.draw.rect(screen, color2, [960, 100, 480, 300])
     pygame.draw.rect(screen, color3, [1440, 100, 480, 300])
 
+    # draw arrow
+    pygame.draw.polygon(screen, (200, 200, 100), (((0 + t), 200), ((0+t), 300), ((200+t), 300), ((200+t), 400), ((300+t), 250), ((200+t), 100), ((200+t), 200)))
+
     # update
     pygame_widgets.update(events)
     pygame.display.update()
+    t += 30
+    #
+    # if t > 2000:
+    #     t = 30
 
 pygame.quit()
